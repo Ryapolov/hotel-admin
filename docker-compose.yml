@@ -1,0 +1,72 @@
+version: '3'
+services:
+  hotel-nginx:
+    container_name: hotel-nginx
+    build:
+      context: docker/nginx
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - hotel-php-fpm
+    ports:
+      - "8000:80"
+    networks:
+      - internal
+
+  hotel-php-fpm:
+    container_name: hotel-php-fpm
+    build:
+      context: docker/php-fpm
+    volumes:
+      - ./:/var/www
+    environment:
+      XDEBUG_CONFIG: "remote_host=192.168.110.1 remote_enable=1"
+      PHP_IDE_CONFIG: "serverName=Docker"
+    depends_on:
+      - hotel-postgres
+      - mailer
+    networks:
+      - internal
+
+  hotel-node-watch:
+    image: node:12.7-alpine
+    volumes:
+      - ./app:/app
+    working_dir: /app
+    command: sh -c "until [ -f .ready ] ; do sleep 1 ; done && npm run watch"
+
+  hotel-node:
+    image: node:12.7-alpine
+    volumes:
+      - ./app:/app
+    working_dir: /app
+
+  hotel-postgres:
+    container_name: hotel-postgres
+    image: postgres:11.2-alpine
+    volumes:
+      - hotel-postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: "secret"
+      POSTGRES_USER: "symfony"
+      POSTGRES_DB: "app"
+    ports:
+      - "54321:5432"
+    networks:
+      - internal
+
+  mailer:
+    image: mailhog/mailhog
+    ports:
+      - "8082:8025"
+
+volumes:
+  hotel-postgres:
+
+networks:
+  internal:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.110.0/28
