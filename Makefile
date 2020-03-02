@@ -22,7 +22,7 @@ docker-pull:
 docker-build:
 	docker-compose build
 
-hotel-init: hotel-composer-install hotel-assets-install  hotel-wait-db  hotel-ready
+hotel-init: hotel-composer-install hotel-assets-install  hotel-wait-db hotel-migrations hotel-fixtures hotel-ready
 
 hotel-clear:
 	docker run --rm -v ${PWD}/app:/app --workdir=/app alpine rm -f .ready

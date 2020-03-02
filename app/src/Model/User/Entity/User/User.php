@@ -3,7 +3,6 @@
 namespace App\Model\User\Entity\User;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Model\User\Repository\UserRepository")
@@ -12,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *     @ORM\UniqueConstraint(columns={"confirm_token"})
  * })
  */
-class User implements UserInterface
+class User
 {
     /**
      * @var Id
@@ -140,5 +139,13 @@ class User implements UserInterface
     public function setPassword(string $password): void
     {
         $this->password = $password;
+    }
+
+    /**
+     * @param Role $role
+     */
+    public function setRole(Role $role): void
+    {
+        $this->role = $role;
     }
 }
