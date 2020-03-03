@@ -47,6 +47,6 @@ class UserProvider implements UserProviderInterface
      */
     public function supportsClass(string $class): bool
     {
-        return $class instanceof UserIdentity;
+        return $class === UserIdentity::class;
     }
 }

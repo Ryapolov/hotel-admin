@@ -31,8 +31,7 @@ hotel-composer-install:
 	docker-compose run --rm hotel-php-fpm composer install
 
 hotel-assets-install:
-	docker-compose run --rm hotel-node yarn install
-	docker-compose run --rm hotel-node npm rebuild node-sass
+	docker-compose run --rm hotel-node yarn run dev
 
 hotel-wait-db:
 	until docker-compose exec -T hotel-postgres pg_isready --timeout=0 --dbname=app ; do sleep 1 ; done
