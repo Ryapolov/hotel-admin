@@ -31,7 +31,10 @@ hotel-composer-install:
 	docker-compose run --rm hotel-php-fpm composer install
 
 hotel-assets-install:
-	docker-compose run --rm hotel-node yarn run dev
+	docker-compose run --rm hotel-node yarn install
+
+hotel-assets-add:
+	docker-compose run --rm hotel-node yarn add -s @fortawesome/fontawesome-free
 
 hotel-wait-db:
 	until docker-compose exec -T hotel-postgres pg_isready --timeout=0 --dbname=app ; do sleep 1 ; done
@@ -46,7 +49,7 @@ hotel-ready:
 	docker run --rm -v ${PWD}/app:/app --workdir=/app alpine touch .ready
 
 hotel-assets-dev:
-	docker-compose run --rm hotel-node npm run dev
+	docker-compose run --rm hotel-node yarn run encore dev --watch
 
 hotel-test:
 	docker-compose run --rm hotel-php-fpm php bin/phpunit

@@ -3,9 +3,7 @@
         "@symfony/webpack-encore": "^0.28.2",
         "core-js": "^3.0.0",
         "regenerator-runtime": "^0.13.2",
-        "webpack-notifier": "^1.6.0",
-        "admin-lte": "^3.0.2",
-        "jquery": "^3.4"
+        "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
     "private": true,
@@ -14,5 +12,12 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.12.1",
+        "admin-lte": "^3.0",
+        "bootstrap": "^4.4.1",
+        "jquery": "^3.4.1",
+        "popper.js": "^1.16.1"
     }
 }
