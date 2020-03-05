@@ -7,9 +7,16 @@ namespace App\Model\User\Repository;
 use App\Model\User\Entity\User\Email;
 use App\Model\User\Entity\User\Id;
 use App\Model\User\Entity\User\User;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
-class UserRepository
+class UserRepository extends ServiceEntityRepository
 {
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, User::class);
+    }
+
     public function add(User $user): void
     {
 
@@ -20,13 +27,14 @@ class UserRepository
         return true;
     }
 
-    public function get(Id $id): User
+    public function get(Id $id): bool
     {
-
+        return true;
     }
 
-    public function getByToken(string $token):User
+    public function getByToken(string $token):bool
     {
+        return true;
 
     }
 }

@@ -30,7 +30,8 @@
         "symfony/yaml": "5.0.*",
         "ramsey/uuid": "3.*",
         "webmozart/assert": "1.*",
-        "symfony/webpack-encore-bundle": "^1.5"
+        "symfony/webpack-encore-bundle": "^1.5",
+        "knplabs/knp-menu-bundle": "3.*"
     },
     "require-dev": {
         "doctrine/data-fixtures": "^1.4",
