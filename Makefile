@@ -30,6 +30,9 @@ hotel-clear:
 hotel-composer-install:
 	docker-compose run --rm hotel-php-fpm composer install
 
+hotel-composer-add:
+	docker-compose run --rm hotel-php-fpm composer require knplabs/knp-menu-bundle "^2.0"
+
 hotel-assets-install:
 	docker-compose run --rm hotel-node yarn install
 

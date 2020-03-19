@@ -2,26 +2,31 @@
 
 namespace App\DataFixtures;
 
-use App\Model\User\Entity\User\Email;
-use App\Model\User\Entity\User\Id;
-use App\Model\User\Entity\User\Name;
-use App\Model\User\Entity\User\Role;
-use App\Model\User\Entity\User\Status;
-use App\Model\User\Entity\User\User;
-use App\Model\User\Service\PasswordHasher;
+use App\Model\User\Application\Services\PasswordHasherService;
+use App\Model\User\Domain\User\User;
+use App\Model\User\Domain\User\ValueObject\Email;
+use App\Model\User\Domain\User\ValueObject\Id;
+use App\Model\User\Domain\User\ValueObject\Name;
+use App\Model\User\Domain\User\ValueObject\Role;
+use App\Model\User\Domain\User\ValueObject\Status;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
 class UserFixture extends Fixture
 {
     /**
-     * @var PasswordHasher
+     * @var PasswordHasherService
      */
     private $passwordHasher;
 
-    public function __construct(PasswordHasher $passwordHasher)
+    /**
+     * UserFixture constructor.
+     *
+     * @param PasswordHasherService $passwordHasherService
+     */
+    public function __construct(PasswordHasherService $passwordHasherService)
     {
-        $this->passwordHasher = $passwordHasher;
+        $this->passwordHasher = $passwordHasherService;
     }
 
     /**
@@ -30,9 +35,10 @@ class UserFixture extends Fixture
     public function load(ObjectManager $manager)
     {
         $user = new User(Id::next(), new Email('admin@mail.ru'), new Name('Admin', ''), new \DateTimeImmutable(), '');
-        $user->setPassword($this->passwordHasher->getHash('secret'));
-        $user->setStatus(Status::activation());
-        $user->setRole(Role::admin());
+        $user->setPassword($this->passwordHasher->getHash('secret'))
+            ->setStatus(Status::activation())
+            ->setRole(Role::admin()
+        );
 
         $manager->persist($user);
         $manager->flush();

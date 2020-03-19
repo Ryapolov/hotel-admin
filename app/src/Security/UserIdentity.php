@@ -4,7 +4,7 @@
 namespace App\Security;
 
 
-use App\Model\User\Entity\User\Status;
+use App\Model\User\Domain\User\ValueObject\Status;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 

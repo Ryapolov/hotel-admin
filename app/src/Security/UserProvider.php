@@ -1,10 +1,8 @@
 <?php
 
-
 namespace App\Security;
 
-
-use App\ReadModel\User\UserFether;
+use App\Model\User\Application\Query\UserFinder;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -12,13 +10,13 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 class UserProvider implements UserProviderInterface
 {
     /**
-     * @var UserFether
+     * @var UserFinder
      */
-    private $userFetcher;
+    private $userFinder;
 
-    public function __construct(UserFether $userFetcher)
+    public function __construct(UserFinder $userFinder)
     {
-        $this->userFetcher = $userFetcher;
+        $this->userFinder = $userFinder;
     }
 
     /**
@@ -26,7 +24,7 @@ class UserProvider implements UserProviderInterface
      */
     public function loadUserByUsername(string $username): UserInterface
     {
-        $user = $this->userFetcher->findForAuthByEmail($username);
+        $user = $this->userFinder->findByEmail($username, ['id', 'email', 'password', 'status', 'role']);
         if (!$user) {
             throw new UsernameNotFoundException('');
         }
