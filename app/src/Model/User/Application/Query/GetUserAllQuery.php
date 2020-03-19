@@ -1,11 +1,13 @@
 <?php
 
+
 namespace App\Model\User\Application\Query;
+
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\FetchMode;
 
-class UserFinder
+class GetUserAllQuery
 {
     /**
      * @var Connection
@@ -17,17 +19,15 @@ class UserFinder
         $this->connection = $connection;
     }
 
-    public function findByEmail(string $email, $selectList)
+    public function execute(array $selectList)
     {
         $stmt = $this->connection->createQueryBuilder()
             ->select($selectList)
             ->from('user_users')
-            ->where('email = :email')
-            ->setParameter(':email', $email)
             ->execute();
 
         $stmt->setFetchMode(FetchMode::STANDARD_OBJECT);
 
-        return $stmt->fetch();
+        return $stmt->fetchAll();
     }
 }

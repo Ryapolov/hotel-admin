@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\Model\User\Application\Query\UserFinder;
+use App\Model\User\Application\Query\FindUserByEmailQuery;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -10,13 +10,13 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 class UserProvider implements UserProviderInterface
 {
     /**
-     * @var UserFinder
+     * @var FindUserByEmailQuery
      */
-    private $userFinder;
+    private $findUserByEmailQuery;
 
-    public function __construct(UserFinder $userFinder)
+    public function __construct(FindUserByEmailQuery $findUserByEmailQuery)
     {
-        $this->userFinder = $userFinder;
+        $this->findUserByEmailQuery = $findUserByEmailQuery;
     }
 
     /**
@@ -24,7 +24,7 @@ class UserProvider implements UserProviderInterface
      */
     public function loadUserByUsername(string $username): UserInterface
     {
-        $user = $this->userFinder->findByEmail($username, ['id', 'email', 'password', 'status', 'role']);
+        $user = $this->findUserByEmailQuery->execute($username, ['id', 'email', 'password', 'status', 'role']);
         if (!$user) {
             throw new UsernameNotFoundException('');
         }

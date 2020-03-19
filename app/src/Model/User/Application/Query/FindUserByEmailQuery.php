@@ -14,23 +14,18 @@ class FindUserByEmailQuery
      */
     private $connection;
 
-    /**
-     * FindByEmailQuery constructor.
-     *
-     * @param Connection $connection
-     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
     }
 
-    public function execute(Email $email, $selectList)
+    public function execute(string $email, $selectList)
     {
         $stmt = $this->connection->createQueryBuilder()
             ->select($selectList)
             ->from('user_users')
             ->where('email = :email')
-            ->setParameter(':email', $email->getValue())
+            ->setParameter(':email', $email)
             ->execute();
 
         $stmt->setFetchMode(FetchMode::STANDARD_OBJECT);

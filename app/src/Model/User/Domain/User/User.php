@@ -61,15 +61,22 @@ class User
      */
     private $role;
 
-    public function __construct(Id $id, Email $email, Name $name, \DateTimeImmutable $createDate, string $confirmToken)
+    private function __construct(Id $id, Email $email, \DateTimeImmutable $createDate)
     {
         $this->id = $id;
         $this->email = $email;
-        $this->name = $name;
         $this->createDate = $createDate;
-        $this->status = Status::new();
-        $this->role = Role::user();
-        $this->confirmToken = $confirmToken;
+    }
+
+    public static function create(Id $id, Email $email, Name $name, \DateTimeImmutable $createDate, string $confirmToken)
+    {
+        $user = new self($id, $email, $createDate);
+        $user->name = $name;
+        $user->confirmToken = $confirmToken;
+        $user->status = Status::new();
+        $user->role = Role::user();
+
+        return $user;
     }
 
     /**
