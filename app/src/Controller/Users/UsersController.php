@@ -8,6 +8,7 @@ use App\Model\User\Application\Command\Create\Command;
 use App\Model\User\Application\Command\Create\Form;
 use App\Model\User\Application\Command\Create\Handler;
 use App\Model\User\Application\Query\GetUserAllQuery;
+use App\Model\User\Domain\User\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,4 +51,6 @@ class UsersController extends AbstractController
 
         return $this->render('app/users/create.html.twig', ['form' => $form->createView()]);
     }
+
+
 }

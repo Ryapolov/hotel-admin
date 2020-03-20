@@ -166,4 +166,10 @@ class User
     {
         $this->role = $role;
     }
+
+    public function confirmByToken()
+    {
+        $this->setStatus(Status::activation());
+        $this->confirmToken = null;
+    }
 }

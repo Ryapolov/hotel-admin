@@ -34,7 +34,13 @@ class UserFixture extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $user = new User(Id::next(), new Email('admin@mail.ru'), new Name('Admin', ''), new \DateTimeImmutable(), '');
+        $user = User::create(
+            Id::next(),
+            new Email('admin@mail.ru'),
+            new Name('Admin', ''),
+            new \DateTimeImmutable(),
+            ''
+        );
         $user->setPassword($this->passwordHasher->getHash('secret'))
             ->setStatus(Status::activation())
             ->setRole(Role::admin()
