@@ -2,6 +2,7 @@
 
 namespace App\Model\User\Domain\User\DoctrineType;
 
+use App\Model\User\Domain\User\ValueObject\Role;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 

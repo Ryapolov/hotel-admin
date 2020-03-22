@@ -1,0 +1,7 @@
+{% if status == 'NEW' %}
+    <span class="badge badge-secondary">New</span>
+{% elseif status == 'ACTIVE' %}
+    <span class="badge badge-primary">Active</span>
+{% elseif status == 'blocked' %}
+    <span class="badge badge-danger">Block</span>
+{% endif %}

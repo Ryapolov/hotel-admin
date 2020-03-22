@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Model\User\Application\Command\Confirm;
+
+namespace App\Model\User\Application\Command\Block;
+
 
 use App\Model\User\Application\Repository\UserRepository;
+use App\Model\User\Domain\User\ValueObject\Status;
 use Doctrine\ORM\EntityManagerInterface;
 
-class Handler
+class BlockHandler
 {
     /**
      * @var UserRepository
@@ -22,11 +25,19 @@ class Handler
         $this->entityManager = $entityManager;
     }
 
-    public function handle(Command $command)
+    /**
+     * @param BlockCommand $command
+     * @throws \Doctrine\ORM\EntityNotFoundException
+     */
+    public function handle(BlockCommand $command): void
     {
-        $user = $this->userRepository->getByConfirmToken($command->token);
-        $user->confirmByToken();
+        $user = $this->userRepository->get($command->id);
 
+        if ($user->getStatus()->isBlocked()) {
+            throw new \DomainException('User is already blocked');
+        }
+
+        $user->setStatus(Status::blocked());
         $this->entityManager->flush();
     }
 }

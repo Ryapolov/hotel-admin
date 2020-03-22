@@ -185,16 +185,17 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
-
-                    <li class="nav-item">
-                        <a href="{{ path('users') }}" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
-                            <p>
-                                Users
-                                <span class="right badge badge-danger"></span>
-                            </p>
-                        </a>
-                    </li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a href="{{ path('users') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Users
+                                    <span class="right badge badge-danger"></span>
+                                </p>
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

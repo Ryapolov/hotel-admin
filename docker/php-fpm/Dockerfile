@@ -9,6 +9,9 @@ RUN apt-get update && apt-get install -y wget git unzip  \
 RUN wget https://getcomposer.org/installer -O - -q \
     | php -- --install-dir=/bin --filename=composer --quiet
 
+RUN wget https://curl.haxx.se/ca/cacert.pem \
+    && mv cacert.pem /home/cacert.pem
+
 ADD php.ini /usr/local/etc/php/conf.d/40-custom.ini
 
 WORKDIR /var/www/app

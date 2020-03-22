@@ -4,6 +4,7 @@ namespace App\Model\User\Application\Command\Create;
 
 use App\Model\User\Application\Query\FindUserByEmailQuery;
 use App\Model\User\Application\Repository\UserRepository;
+use App\Model\User\Application\Services\Interfaces\ConfirmTokenSenderInterface;
 use App\Model\User\Application\Services\TokenizerService;
 use App\Model\User\Domain\User\User;
 use App\Model\User\Domain\User\ValueObject\Email;
@@ -11,7 +12,7 @@ use App\Model\User\Domain\User\ValueObject\Id;
 use App\Model\User\Domain\User\ValueObject\Name;
 use Doctrine\ORM\EntityManagerInterface;
 
-class Handler
+class CreateHandler
 {
     /**
      * @var FindUserByEmailQuery
@@ -29,21 +30,27 @@ class Handler
      * @var EntityManagerInterface
      */
     private $entityManager;
+    /**
+     * @var ConfirmTokenSenderInterface
+     */
+    private $confirmTokenSender;
 
     public function __construct(
         FindUserByEmailQuery $findUserByEmailQuery,
         TokenizerService $tokenizerService,
         UserRepository $userRepository,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        ConfirmTokenSenderInterface $confirmTokenSender
     )
     {
         $this->findUserByEmailQuery = $findUserByEmailQuery;
         $this->tokenizerService = $tokenizerService;
         $this->userRepository = $userRepository;
         $this->entityManager = $entityManager;
+        $this->confirmTokenSender = $confirmTokenSender;
     }
 
-    public function handle(Command $command)
+    public function handle(CreateCommand $command)
     {
         $email = new Email($command->email);
 
@@ -52,15 +59,16 @@ class Handler
         }
 
         $user = User::create(
-            Id::next(),
+            $id = Id::next(),
             $email,
             new Name($command->firstName, $command->lastName),
             new \DateTimeImmutable(),
-            $this->tokenizerService->generate()
+            $token = $this->tokenizerService->generate()
         );
-
 
         $this->userRepository->add($user);
         $this->entityManager->flush();
+
+        $this->confirmTokenSender->send($email, $token, $id);
     }
 }

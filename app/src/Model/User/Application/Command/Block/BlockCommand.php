@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Model\User\Application\Command\Confirm;
+
+namespace App\Model\User\Application\Command\Block;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Command
+class BlockCommand
 {
     /**
+     * @var string
      * @Assert\NotBlank()
      */
-    public $token;
+    public $id;
 }

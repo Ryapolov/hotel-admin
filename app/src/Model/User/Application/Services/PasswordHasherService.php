@@ -5,7 +5,9 @@ namespace App\Model\User\Application\Services;
 
 
 
-class PasswordHasherService
+use App\Model\User\Application\Services\Interfaces\PasswordHasherInterface;
+
+class PasswordHasherService implements PasswordHasherInterface
 {
     /**
      * @param string $password

@@ -42,7 +42,7 @@ class UserFixture extends Fixture
             ''
         );
         $user->setPassword($this->passwordHasher->getHash('secret'))
-            ->setStatus(Status::activation())
+            ->setStatus(Status::activate())
             ->setRole(Role::admin()
         );
 

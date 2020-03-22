@@ -17,12 +17,27 @@ class UserRepository
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->repository = $this->entityManager->getRepository(User::class);
+        $this->repository = $entityManager->getRepository(User::class);
     }
 
     public function add(User $user): void
     {
         $this->entityManager->persist($user);
+    }
+
+    /**
+     * @param string $id
+     * @return User
+     * @throws EntityNotFoundException
+     */
+    public function get(string $id): User
+    {
+        /** @var User $user */
+        if (empty($user = $this->repository->find($id))) {
+            throw new EntityNotFoundException('User is not found.');
+        }
+
+        return $user;
     }
 
     /**

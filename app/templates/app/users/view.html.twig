@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="box">
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ user.name.full }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email ? user.email.value : '' }}</td>
+            </tr>
+            <tr>
+                <th>Created</th>
+                <td>{{ user.createDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Role</th>
+                <td>{{ user_role(user.role) }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ user_status(user.status) }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

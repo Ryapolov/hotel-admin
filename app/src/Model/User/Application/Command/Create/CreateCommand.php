@@ -4,7 +4,7 @@ namespace App\Model\User\Application\Command\Create;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Command
+class CreateCommand
 {
     /**
      * @Assert\NotBlank()

@@ -6,8 +6,10 @@ use Webmozart\Assert\Assert;
 
 class Role
 {
-    const ADMIN = 'ROLE_ADMIN';
-    const USER = 'ROLE_USER';
+    public const ADMIN = 'ROLE_ADMIN';
+    public const USER = 'ROLE_USER';
+    public const USER_WAIT_CONFIRM = 'ROLE_USER_WAIT_CONFIRM';
+
 
     private $value;
 
@@ -36,6 +38,22 @@ class Role
     public static function user(): Role
     {
         return new self(self::USER);
+    }
+
+    /**
+     * @return Role
+     */
+    public static function userWaitConfirm(): Role
+    {
+        return new self(self::USER_WAIT_CONFIRM);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUserWaitConfirm(): bool
+    {
+        return$this->value === self::USER_WAIT_CONFIRM;
     }
 
     public function isUser()

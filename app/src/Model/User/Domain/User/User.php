@@ -11,7 +11,7 @@ use App\Model\User\Domain\User\ValueObject\Status;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Model\User\Application\Repository\UserRepository")
+ * @ORM\Entity
  * @ORM\Table(name="user_users", uniqueConstraints={
  *     @ORM\UniqueConstraint(columns={"email"}),
  *     @ORM\UniqueConstraint(columns={"confirm_token"})
@@ -68,13 +68,21 @@ class User
         $this->createDate = $createDate;
     }
 
-    public static function create(Id $id, Email $email, Name $name, \DateTimeImmutable $createDate, string $confirmToken)
+    /**
+     * @param Id $id
+     * @param Email $email
+     * @param Name $name
+     * @param \DateTimeImmutable $createDate
+     * @param string $confirmToken
+     * @return User
+     */
+    public static function create(Id $id, Email $email, Name $name, \DateTimeImmutable $createDate, string $confirmToken): User
     {
         $user = new self($id, $email, $createDate);
         $user->name = $name;
         $user->confirmToken = $confirmToken;
         $user->status = Status::new();
-        $user->role = Role::user();
+        $user->role = Role::userWaitConfirm();
 
         return $user;
     }
@@ -160,6 +168,14 @@ class User
     }
 
     /**
+     * @return string|null
+     */
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    /**
      * @param Role $role
      */
     public function setRole(Role $role): void
@@ -167,9 +183,10 @@ class User
         $this->role = $role;
     }
 
-    public function confirmByToken()
+    public function confirmByToken(): void
     {
-        $this->setStatus(Status::activation());
+        $this->setStatus(Status::activate());
+        $this->setRole(Role::user());
         $this->confirmToken = null;
     }
 }

@@ -8,6 +8,7 @@ class Status
 {
     public const ACTIVE = 'ACTIVE';
     public const NEW = 'NEW';
+    public const BLOCKED = 'BLOCKED';
 
     private $value;
 
@@ -18,7 +19,7 @@ class Status
      */
     public function __construct(string $value)
     {
-        Assert::oneOf($value, [self::ACTIVE, self::NEW]);
+        Assert::oneOf($value, [self::ACTIVE, self::NEW, self::BLOCKED]);
 
         $this->value = $value;
     }
@@ -31,7 +32,7 @@ class Status
     /**
      * @return Status
      */
-    public static function activation(): Status
+    public static function activate(): Status
     {
         return new self(self::ACTIVE);
     }
@@ -42,6 +43,22 @@ class Status
     public static function new(): Status
     {
         return new self(self::NEW);
+    }
+
+    /**
+     * @return Status
+     */
+    public static function blocked(): Status
+    {
+        return new self(self::BLOCKED);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isBlocked(): bool
+    {
+        return $this->value === self::BLOCKED;
     }
 
     /**

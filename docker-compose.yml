@@ -49,9 +49,13 @@ services:
       - internal
 
   mailer:
+    container_name: hotel-mailer
     image: mailhog/mailhog
     ports:
+      - "1025:1025"
       - "8082:8025"
+    networks:
+      - internal
 
 volumes:
   hotel-postgres:
