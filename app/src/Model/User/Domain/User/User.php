@@ -82,7 +82,7 @@ class User
         $user->name = $name;
         $user->confirmToken = $confirmToken;
         $user->status = Status::new();
-        $user->role = Role::userWaitConfirm();
+        $user->role = Role::user();
 
         return $user;
     }
@@ -138,7 +138,7 @@ class User
     /**
      * @return string
      */
-    public function getConfirmToken(): string
+    public function getConfirmToken(): ?string
     {
         return $this->confirmToken;
     }

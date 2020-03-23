@@ -52,12 +52,20 @@
                                         </i>
                                         Edit
                                     </a>
-                                    {% if  %}
-                                    <a class="btn btn-danger btn-sm" href="{{ path('user.block', {'id': user.id}) }}">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Block
-                                    </a>
+                                    {% if user.status == "ACTIVE" %}
+                                        <a class="btn btn-danger btn-sm" href="{{ path('user.block', {'id': user.id}) }}">
+                                            <i class="fas fa-trash">
+                                            </i>
+                                            Block
+                                        </a>
+                                    {% endif %}
+                                    {% if user.status == "BLOCKED" %}
+                                        <a class="btn btn-danger btn-sm" href="{{ path('user.activate', {'id': user.id}) }}">
+                                            <i class="fas fa-trash">
+                                            </i>
+                                            Activate
+                                        </a>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}

@@ -49,7 +49,7 @@ class UsersController extends AbstractController
         return $this->render('app/users/index.html.twig', ['users' => $users]);
     }
 
-    /** @Route("/users/{id}", name="user.view")
+    /** @Route("/users/view/{id}", name="user.view")
      * @param User $user
      * @return Response
      */
@@ -102,6 +102,7 @@ class UsersController extends AbstractController
                 'error',
                 $exception->getMessage()
             );
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->redirectToRoute('user.set.password', ['id' => $request->get('id')]);
@@ -162,6 +163,7 @@ class UsersController extends AbstractController
     }
 
     /**
+     * @Route("user/activate/{id}", name="user.activate")
      * @param Request $request
      * @param ActivateCommand $activateCommand
      * @param ActivateHandler $activateHandler

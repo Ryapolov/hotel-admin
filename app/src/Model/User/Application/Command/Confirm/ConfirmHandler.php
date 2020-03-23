@@ -30,7 +30,7 @@ class ConfirmHandler
     {
         $user = $this->userRepository->get($command->id);
 
-        if (!$user->getRole()->isUserWaitConfirm()) {
+        if ($user->getConfirmToken() === null || $user->getStatus()->isActive()) {
             throw new \DomainException('User is already confirm');
         }
 

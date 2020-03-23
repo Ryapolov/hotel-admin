@@ -40,22 +40,6 @@ class Role
         return new self(self::USER);
     }
 
-    /**
-     * @return Role
-     */
-    public static function userWaitConfirm(): Role
-    {
-        return new self(self::USER_WAIT_CONFIRM);
-    }
-
-    /**
-     * @return bool
-     */
-    public function isUserWaitConfirm(): bool
-    {
-        return$this->value === self::USER_WAIT_CONFIRM;
-    }
-
     public function isUser()
     {
         return $this->value === self::USER;
