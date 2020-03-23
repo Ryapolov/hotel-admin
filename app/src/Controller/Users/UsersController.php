@@ -13,6 +13,9 @@ use App\Model\User\Application\Command\Confirm\ConfirmHandler;
 use App\Model\User\Application\Command\Create\CreateCommand;
 use App\Model\User\Application\Command\Create\CreateForm;
 use App\Model\User\Application\Command\Create\CreateHandler;
+use App\Model\User\Application\Command\Edit\EditCommand;
+use App\Model\User\Application\Command\Edit\EditForm;
+use App\Model\User\Application\Command\Edit\EditHandler;
 use App\Model\User\Application\Command\SetPassword\SetPasswordCommand;
 use App\Model\User\Application\Command\SetPassword\SetPasswordForm;
 use App\Model\User\Application\Command\SetPassword\SetPasswordHandler;
@@ -136,6 +139,45 @@ class UsersController extends AbstractController
         }
 
         return $this->render('app/users/set.password.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("user/edit/{id}", name="user.edit")
+     * @param Request $request
+     * @param User $user
+     * @param EditHandler $editHandler
+     * @return Response
+     * @throws \Doctrine\ORM\EntityNotFoundException
+     */
+    public function edit(Request $request, User $user, EditHandler $editHandler): Response
+    {
+        $editCommand = new EditCommand(
+            $user->getId()->getValue(),
+            $user->getEmail()->getValue(),
+            $user->getName()->getFirst(),
+            $user->getName()->getLast()
+        );
+
+        $form = $this->createForm(EditForm::class, $editCommand);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $editHandler->handle($editCommand);
+            } catch (DomainException $exception) {
+                $this->addFlash(
+                    'error',
+                    $exception->getMessage()
+                );
+            }
+
+            $this->addFlash(
+                'success',
+                'Success!'
+            );
+        }
+
+        return $this->render('app/users/edit.html.twig', ['form' => $form->createView()]);
     }
 
     /**

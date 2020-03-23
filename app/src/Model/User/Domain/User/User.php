@@ -189,4 +189,26 @@ class User
         $this->setRole(Role::user());
         $this->confirmToken = null;
     }
+
+    /**
+     * @param Email $email
+     * @return User
+     */
+    public function setEmail(Email $email): User
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @param Name $name
+     * @return User
+     */
+    public function setName(Name $name): User
+    {
+        $this->name = $name;
+
+        return $this;
+    }
 }

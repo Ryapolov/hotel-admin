@@ -47,7 +47,7 @@
                                         </i>
                                         View
                                     </a>
-                                    <a class="btn btn-info btn-sm" href="#">
+                                    <a class="btn btn-info btn-sm" href="{{ path('user.edit', {'id': user.id}) }}">
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Edit
@@ -60,9 +60,7 @@
                                         </a>
                                     {% endif %}
                                     {% if user.status == "BLOCKED" %}
-                                        <a class="btn btn-danger btn-sm" href="{{ path('user.activate', {'id': user.id}) }}">
-                                            <i class="fas fa-trash">
-                                            </i>
+                                        <a class="btn btn-success btn-sm" href="{{ path('user.activate', {'id': user.id}) }}">
                                             Activate
                                         </a>
                                     {% endif %}
