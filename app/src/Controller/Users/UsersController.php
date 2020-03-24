@@ -197,9 +197,9 @@ class UsersController extends AbstractController
                 'error',
                 'You cannot block yourself!'
             );
+        } else {
+            $blockHandler->handle($blockCommand);
         }
-
-        $blockHandler->handle($blockCommand);
 
         return $this->redirectToRoute('users');
     }
