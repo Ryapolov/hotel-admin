@@ -155,7 +155,8 @@ class UsersController extends AbstractController
             $user->getId()->getValue(),
             $user->getEmail()->getValue(),
             $user->getName()->getFirst(),
-            $user->getName()->getLast()
+            $user->getName()->getLast(),
+            $user->getRole()->getValue()
         );
 
         $form = $this->createForm(EditForm::class, $editCommand);

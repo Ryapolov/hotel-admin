@@ -8,6 +8,7 @@ use App\Model\User\Application\Query\FindUserByEmailQuery;
 use App\Model\User\Application\Repository\UserRepository;
 use App\Model\User\Domain\User\ValueObject\Email;
 use App\Model\User\Domain\User\ValueObject\Name;
+use App\Model\User\Domain\User\ValueObject\Role;
 use Doctrine\ORM\EntityManagerInterface;
 
 class EditHandler
@@ -56,7 +57,8 @@ class EditHandler
         }
 
         $user->setEmail(new Email($editCommand->email))
-            ->setName(new Name($editCommand->firstName, $editCommand->lastName));
+            ->setName(new Name($editCommand->firstName, $editCommand->lastName))
+            ->setRole(new Role($editCommand->role));
 
         $this->entityManager->flush();
     }
