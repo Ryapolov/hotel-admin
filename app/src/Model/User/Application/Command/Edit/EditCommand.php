@@ -24,12 +24,17 @@ class EditCommand
      * @Assert\NotBlank()
      */
     public $lastName;
+    /**
+     * @Assert\NotBlank()
+     */
+    public $role;
 
-    public function __construct(string $id, string $email, string $firstName, string $lastName)
+    public function __construct(string $id, string $email, string $firstName, string $lastName, string $role)
     {
         $this->id = $id;
         $this->email = $email;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
+        $this->role = $role;
     }
 }

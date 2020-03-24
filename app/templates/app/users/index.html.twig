@@ -39,8 +39,8 @@
                                 <td>{{ user.name_first }} {{ user.name_last }}</td>
                                 <td>{{ user.email }}</td>
                                 <td>{{ user.create_date }}</td>
-                                <td>{{ user.status }}</td>
-                                <td>{{ user.role }}</td>
+                                <td>{{ user_status(user.status) }}</td>
+                                <td>{{ user_role(user.role) }}</td>
                                 <td class="project-actions text-right">
                                     <a class="btn btn-primary btn-sm" href="{{ path('user.view', {'id': user.id}) }}">
                                         <i class="fas fa-folder">
