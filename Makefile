@@ -61,7 +61,7 @@ hotel-test-coverage:
 	docker-compose run --rm hotel-php-fpm php bin/phpunit --coverage-clover var/clover.xml --coverage-html var/coverage
 
 hotel-test-unit:
-	docker-compose run --rm hotel-php-fpm php bin/phpunit --testsuite=unit
+	docker-compose run --rm hotel-php-fpm php bin/phpunit
 
 hotel-test-unit-coverage:
 	docker-compose run --rm hotel-php-fpm php bin/phpunit --testsuite=unit --coverage-clover var/clover.xml --coverage-html var/coverage
