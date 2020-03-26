@@ -5,13 +5,14 @@ namespace App\Model\User\Application\Command\Activate;
 
 
 use App\Model\User\Application\Repository\UserRepository;
+use App\Model\User\Application\Repository\UserRepositoryInterface;
 use App\Model\User\Domain\User\ValueObject\Status;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ActivateHandler
 {
     /**
-     * @var UserRepository
+     * @var UserRepositoryInterface
      */
     private $userRepository;
     /**
@@ -19,7 +20,7 @@ class ActivateHandler
      */
     private $entityManager;
 
-    public function __construct(UserRepository $userRepository, EntityManagerInterface $entityManager)
+    public function __construct(UserRepositoryInterface $userRepository, EntityManagerInterface $entityManager)
     {
         $this->userRepository = $userRepository;
         $this->entityManager = $entityManager;

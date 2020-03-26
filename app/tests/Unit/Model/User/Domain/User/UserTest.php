@@ -27,5 +27,7 @@ class UserTest extends TestCase
         $this->assertEquals($first, $user->getName()->getFirst());
         $this->assertEquals($last, $user->getName()->getLast());
         $this->assertEquals($token, $user->getConfirmToken());
+        $this->assertTrue($user->getStatus()->isNew());
+        $this->assertTrue($user->getRole()->isUser());
     }
 }
