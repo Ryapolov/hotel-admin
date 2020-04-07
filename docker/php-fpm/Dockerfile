@@ -9,6 +9,10 @@ RUN apt-get update && apt-get install -y wget git unzip  \
 RUN wget https://getcomposer.org/installer -O - -q \
     | php -- --install-dir=/bin --filename=composer --quiet
 
+RUN pecl install -o -f redis \
+    && rm -rf /tmp/pear \
+    && docker-php-ext-enable redis
+
 ADD php.ini /usr/local/etc/php/conf.d/40-custom.ini
 
 WORKDIR /var/www/app
