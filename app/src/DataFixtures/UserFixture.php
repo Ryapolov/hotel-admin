@@ -2,13 +2,13 @@
 
 namespace App\DataFixtures;
 
-use App\Model\User\Application\Services\PasswordHasherService;
-use App\Model\User\Domain\User\User;
-use App\Model\User\Domain\User\ValueObject\Email;
-use App\Model\User\Domain\User\ValueObject\Id;
-use App\Model\User\Domain\User\ValueObject\Name;
-use App\Model\User\Domain\User\ValueObject\Role;
-use App\Model\User\Domain\User\ValueObject\Status;
+use App\Modules\User\Application\Services\PasswordHasherService;
+use App\Modules\User\Domain\User\User;
+use App\Modules\User\Domain\User\ValueObject\Email;
+use App\Modules\User\Domain\User\ValueObject\Id;
+use App\Modules\User\Domain\User\ValueObject\Name;
+use App\Modules\User\Domain\User\ValueObject\Role;
+use App\Modules\User\Domain\User\ValueObject\Status;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 

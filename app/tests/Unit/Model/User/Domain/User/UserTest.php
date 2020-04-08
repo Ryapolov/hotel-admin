@@ -3,10 +3,10 @@
 
 namespace App\Tests\Unit\Model\User\Domain\User;
 
-use App\Model\User\Domain\User\User;
-use App\Model\User\Domain\User\ValueObject\Email;
-use App\Model\User\Domain\User\ValueObject\Id;
-use App\Model\User\Domain\User\ValueObject\Name;
+use App\Modules\User\Domain\User\User;
+use App\Modules\User\Domain\User\ValueObject\Email;
+use App\Modules\User\Domain\User\ValueObject\Id;
+use App\Modules\User\Domain\User\ValueObject\Name;
 use PHPUnit\Framework\TestCase;
 
 

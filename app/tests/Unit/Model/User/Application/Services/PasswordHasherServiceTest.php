@@ -4,7 +4,7 @@
 namespace App\Tests\Unit\Model\User\Application\Services;
 
 
-use App\Model\User\Application\Services\PasswordHasherService;
+use App\Modules\User\Application\Services\PasswordHasherService;
 use PHPUnit\Framework\TestCase;
 
 class PasswordHasherServiceTest extends TestCase

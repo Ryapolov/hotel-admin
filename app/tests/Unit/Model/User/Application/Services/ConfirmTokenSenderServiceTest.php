@@ -4,8 +4,8 @@
 namespace App\Tests\Unit\Model\User\Application\Services;
 
 
-use App\Model\User\Application\Services\ConfirmTokenSenderService;
-use App\Model\User\Domain\User\ValueObject\Email;
+use App\Modules\User\Application\Services\ConfirmTokenSenderService;
+use App\Modules\User\Domain\User\ValueObject\Email;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Mailer\MailerInterface;
 

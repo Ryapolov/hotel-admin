@@ -2,9 +2,9 @@
 
 namespace App\Tests\Unit\Model\User\Application\Command\Activate;
 
-use App\Model\User\Application\Command\Activate\ActivateCommand;
-use App\Model\User\Application\Command\Activate\ActivateHandler;
-use App\Model\User\Application\Repository\UserRepositoryInterface;
+use App\Modules\User\Application\Command\Activate\ActivateCommand;
+use App\Modules\User\Application\Command\Activate\ActivateHandler;
+use App\Modules\User\Application\Repository\UserRepositoryInterface;
 use App\Tests\Builder\UserBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;

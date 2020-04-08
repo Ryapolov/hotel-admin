@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\Model\User\Application\Query\FindUserByEmailQuery;
+use App\Modules\User\Application\Query\FindUserByEmailQuery;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;

@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\Model\User\Application\Services\PasswordHasherService;
+use App\Modules\User\Application\Services\PasswordHasherService;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;

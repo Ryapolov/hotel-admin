@@ -2,11 +2,11 @@
 
 namespace App\Tests\Builder;
 
-use App\Model\User\Domain\User\User;
-use App\Model\User\Domain\User\ValueObject\Email;
-use App\Model\User\Domain\User\ValueObject\Id;
-use App\Model\User\Domain\User\ValueObject\Name;
-use App\Model\User\Domain\User\ValueObject\Status;
+use App\Modules\User\Domain\User\User;
+use App\Modules\User\Domain\User\ValueObject\Email;
+use App\Modules\User\Domain\User\ValueObject\Id;
+use App\Modules\User\Domain\User\ValueObject\Name;
+use App\Modules\User\Domain\User\ValueObject\Status;
 
 class UserBuilder
 {
